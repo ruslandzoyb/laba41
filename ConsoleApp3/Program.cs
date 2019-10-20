@@ -11,21 +11,58 @@ namespace ConsoleApp3
     {
         static void Main(string[] args)
         {
-           // Thread.CurrentThread.Name = "Main";
-            ThreadArray thread = new ThreadArray(100, 5,4);
-            thread.Run();
+            // Thread.CurrentThread.Name = "Main";
+
+            ThreadArray thread = new ThreadArray(500000,50,4);
             
-            Thread.Sleep(200);
-            //thread.Time();
-          //  Console.WriteLine( $"Time {thread.nev.ToLongTimeString()} + {thread.off.ToLongTimeString()} ");
+            var th1 = new Thread(Go);
+            DateTime first = DateTime.Now;
+            th1.Start(thread);
+           th1.Join();
+            
+                        
+           
+           // Thread.Sleep(200);
 
+            var second = DateTime.Now;
+            // Console.WriteLine(second-first);
+            /* for (int i = 0; i < 100; i++)
+             {
 
-           /* for (int i = 0; i < 150; i++)
-            {
-                Console.WriteLine($"{thread[i]} {i}");
-            }*/
+                 if (thread[i]==0)
+                 {
+                     Console.BackgroundColor = ConsoleColor.Red;
+                     Console.WriteLine($"{thread[i]} {i}");
+                     Console.ResetColor();
+                 }
+
+             }*/
+            Console.WriteLine("ENd");
+          //  thr.Start();
+           // Console.WriteLine("dggdrgdrg");
+                     
+                                                                        
+                                            
+                                  
 
             Console.ReadKey();
         }
+        static void Start()
+        {
+            for (int i = 0; i < 1000000; i++)
+            {
+                Console.WriteLine(i);
+            }
+        }
+        static void Go(object array) {
+
+            var arr = (ThreadArray)array;
+            arr.TimeOn();
+            arr.Run();
+            
+            arr.TimeOff();
+            //Thread.Sleep(100);
+        }
+        
     }
 }

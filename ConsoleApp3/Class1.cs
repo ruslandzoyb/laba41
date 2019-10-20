@@ -10,7 +10,7 @@ namespace ConsoleApp3
     public class ThreadArray
     {
 
-        private Thread[] Threads;
+        private readonly Thread[] Threads;
         private int[] Array;
         private readonly int arrSize;
         private readonly int threadCount;
@@ -54,32 +54,46 @@ namespace ConsoleApp3
 
             }
         }
+       
         public void Run()
             
-
+            
 
         {
+
            
-           
-            nev = DateTime.Now;
-            Parallel.For(0, Threads.Length, new ParallelOptions() { MaxDegreeOfParallelism = proccesor }, i =>
+
+               Parallel.For(0, Threads.Length, new ParallelOptions() { MaxDegreeOfParallelism = proccesor }, i =>
             {
 
                 Threads[i].Start();
-               
+              
             }
 
 
             );
+            //Thread.Sleep(500);
+
+            //Time();
 
 
+           
+          
 
-            off = DateTime.Now;
-            Time();
         }
-        public void Time()
+
+        public void TimeOn()
         {
-            Console.WriteLine(off.Millisecond-nev.Millisecond);
+            nev = DateTime.Now;
+        }
+        public void TimeOff()
+        {
+            off = DateTime.Now;
+
+            // Console.BackgroundColor = ConsoleColor.Red;
+            // Console.WriteLine(Array[999999]+"  ");
+           
+            Console.WriteLine(off-nev);
            
         }
 
@@ -93,14 +107,23 @@ namespace ConsoleApp3
                 end += valForThread;
                 for (int j = start; j < end; j++)
                 {
-                    Array[j] = r.Next(1, 10);
+                    if (j==9999)
+                    {
+                        Array[j] = 69;
+                    }
+                    else
+                    {
+                        Array[j] =  r.Next(2, 10);
+                        // Console.WriteLine($"{j} {Array[j]} {Thread.CurrentThread.Name}");
+                    }
 
-                    Console.WriteLine($"{j} {Array[j]} {Thread.CurrentThread.Name}");
+
+
 
                 }
                 start = end;
             }
-
+            //off = DateTime.Now;
             
 
 
@@ -113,6 +136,7 @@ namespace ConsoleApp3
                 return Array[index];
             }
         }
+       
 
 
     }
