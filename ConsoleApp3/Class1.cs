@@ -49,12 +49,21 @@ namespace ConsoleApp3
             {
                 Threads[i] = new Thread(Initiliaz);
                 Threads[i].Name = "Thread " + i.ToString();
+                Threads[i].Priority = ThreadPriority.AboveNormal;
                 //
 
 
             }
         }
-       
+       public double Average()
+        {
+            double sum = 0;
+            foreach (var item in Array)
+            {
+                sum += item;
+            }
+            return sum / Array.Length;
+        }
         public void Run()
             
             
@@ -113,7 +122,7 @@ namespace ConsoleApp3
                     }
                     else
                     {
-                        Array[j] =  r.Next(2, 10);
+                        Array[j] =  r.Next(1, 10);
                         // Console.WriteLine($"{j} {Array[j]} {Thread.CurrentThread.Name}");
                     }
 

@@ -13,18 +13,23 @@ namespace ConsoleApp3
         {
             // Thread.CurrentThread.Name = "Main";
 
-            ThreadArray thread = new ThreadArray(500000,50,4);
-            
+            ThreadArray thread = new ThreadArray(1500000,500,4);
+            var one = DateTime.Now;
             var th1 = new Thread(Go);
+            
             DateTime first = DateTime.Now;
             th1.Start(thread);
            th1.Join();
+
+            var two = DateTime.Now;
+
+            Console.WriteLine($" Second {two-one} ");
             
                         
            
-           // Thread.Sleep(200);
+            Thread.Sleep(200);
 
-            var second = DateTime.Now;
+           
             // Console.WriteLine(second-first);
             /* for (int i = 0; i < 100; i++)
              {
@@ -61,6 +66,7 @@ namespace ConsoleApp3
             arr.Run();
             
             arr.TimeOff();
+            Console.WriteLine(arr.Average());
             //Thread.Sleep(100);
         }
         
